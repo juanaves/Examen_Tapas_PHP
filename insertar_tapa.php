@@ -1,28 +1,39 @@
 <?php
 
 include 'head.php';
+//ha pulsado el boton insertar
+if(isset($_REQUEST['insertar']))
+{
+  $codigo_tapa=$_REQUEST['codigo'];
+  $nombre_tapa=$_REQUEST['nombre'];
+  $precio_tapa=$_REQUEST['precio'];
+  $tipo_tapa=$_REQUEST['tipo'];
+  $_SESSION['tapa'][$codigo_tapa]=array ($nombre_tapa, $precio_tapa,$tipo_tapa);
+
+}
+session_start();
 print' 
         <h2 class="postheader">FORMULARIO PARA AÑADIR UNA TAPA</h2>
                                      
            <div   class="postcontent">
-                <form action="" method="post">
+                <form action="insertar_tapa.php" method="post">
                     <table align="center" class="content-layout">
                      <tr>
                       <td align="right"><strong>Codigo de la Tapa :</strong></td>
                       <td>
-                        <input type="text" name="codigo" size="10" />
+                        <input type="text" name="codigo" size="10" required />
                       </td>
                      </tr>
                      <tr>
                       <td align="right"><strong>Nombre de la Tapa :</strong></td>
                       <td>
-                        <input type="text" name="nombre" size="70" />
+                        <input type="text" name="nombre" size="70" required/>
                       </td>
                      </tr>
                      <tr>
                       <td align="right"><strong>Precio :</strong></td>
                       <td>
-                        <input type="text" name="precio" value="0" size="7" />€
+                        <input type="text" name="precio" value="0" size="7" required/>€
                       </td>
                      </tr>
                      
@@ -30,10 +41,10 @@ print'
                         <td align="right"><strong>Tipo de Tapa :</strong></td>
                         <td>
                           <div align="left">
-                                <select name="tipo_tapa">
-                                  <option value="">Fria</option>
-                                  <option value="">Caliente</option>
-                                  <option value="">Bocadillo</option>
+                                <select name="tipo">
+                                  <option value="0">Fria</option>
+                                  <option value="1">Caliente</option>
+                                  <option value="2">Bocadillo</option>
                                   
                                 </select>
                            </div>
@@ -43,7 +54,7 @@ print'
                     <tr>
                         <td colspan="2">
                           <div align="center"><strong>
-                            <input name="calcular" type="submit" value="Insertar Tapa"/>
+                            <input name="insertar" type="submit" value="Insertar Tapa"/>
                             </strong>
                           </div>
                         </td>
@@ -52,6 +63,6 @@ print'
         </form>
         </div>';
 
-
+var_dump($_SESSION['tapas']);
 include 'pie.php';
 
